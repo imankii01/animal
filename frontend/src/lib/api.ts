@@ -96,7 +96,7 @@ export async function updateSession(
   payload: Partial<CreateSessionPayload>
 ): Promise<MilkingSession> {
   const response = await fetch(`${API_BASE_URL}/api/sessions/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
