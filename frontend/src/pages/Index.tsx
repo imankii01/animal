@@ -237,7 +237,7 @@ const Index = () => {
         {/* Pulsing ring effect */}
         <motion.div
           className="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full border-4 border-primary/30"
-          animate={ 
+          animate={{ 
             scale: [1, 1.1, 1],
             opacity: [0.5, 0, 0.5]
           }}
