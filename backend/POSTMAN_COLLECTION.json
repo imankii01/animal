@@ -1,0 +1,164 @@
+{
+  "info": {
+    "_postman_id": "moo-music-tracker-api-v1",
+    "name": "Moo Music Tracker API",
+    "description": "API endpoints for managing dairy milking sessions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Create Milking Session",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start_time\": \"2025-02-04T14:00:00Z\",\n  \"end_time\": \"2025-02-04T14:15:00Z\",\n  \"duration\": 900,\n  \"milk_quantity\": 5.2\n}"
+        },
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions"]
+        }
+      }
+    },
+    {
+      "name": "Get All Sessions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions?sortBy=-created_at&limit=10&skip=0",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions"],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "-created_at"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "skip",
+              "value": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Session by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "description": "Get a specific session by ID. Replace :id with an actual session ID from 'Get All Sessions' response.",
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions/507f1f77bcf86cd799439011",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions", "507f1f77bcf86cd799439011"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "507f1f77bcf86cd799439011",
+              "description": "Session ID from Get All Sessions response"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Session",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Update a session. Replace :id with an actual session ID from 'Get All Sessions' response.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"milk_quantity\": 6.5\n}"
+        },
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions/507f1f77bcf86cd799439011",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions", "507f1f77bcf86cd799439011"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "507f1f77bcf86cd799439011",
+              "description": "Session ID from Get All Sessions response"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete Session",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "description": "Delete a session. Replace :id with an actual session ID from 'Get All Sessions' response.",
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions/507f1f77bcf86cd799439011",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions", "507f1f77bcf86cd799439011"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "507f1f77bcf86cd799439011",
+              "description": "Session ID from Get All Sessions response"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Session Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.moo-music-tracker.hearu.fun/api/sessions/stats/overview",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "sessions", "stats", "overview"]
+        }
+      }
+    }
+  ]
+}
