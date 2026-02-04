@@ -35,7 +35,11 @@ export default function History() {
         getSessions(),
         getStats().catch(() => null), // Stats endpoint might not exist
       ]);
-      setSessions(sessionsData);
+      // Sort sessions by start_time in descending order (most recent first)
+      const sortedSessions = sessionsData.sort((a, b) => 
+        new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
+      );
+      setSessions(sortedSessions);
       setStats(statsData);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to fetch sessions';
@@ -199,10 +203,24 @@ export default function History() {
                     </Button>
                   </div>
                 ) : sessions.length === 0 ? (
-                  <div className="text-center py-16 text-muted-foreground">
-                    <p className="text-lg mb-2">{t.noSessionsYet}</p>
-                    <p className="text-sm">{t.startFirstSession}</p>
-                  </div>
+                  <motion.div 
+                    className="text-center py-12 sm:py-16 px-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="flex justify-center mb-6">
+                      <div className="text-6xl">🐄</div>
+                    </div>
+                    <p className="text-xl sm:text-2xl font-bold text-foreground mb-2">{t.noSessionsYet}</p>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-6">{t.startFirstSession}</p>
+                    <Link to="/">
+                      <Button className="gap-2">
+                        <Milk className="h-4 w-4" />
+                        {t.startMilking}
+                      </Button>
+                    </Link>
+                  </motion.div>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>

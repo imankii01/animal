@@ -30,8 +30,17 @@ const Index = () => {
   const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
   const [finalDuration, setFinalDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Prevent double submissions
 
   const handleStart = () => {
+    if (sessionStartTime) {
+      toast({
+        variant: 'destructive',
+        title: 'Session already in progress',
+        description: 'Please stop the current session before starting a new one',
+      });
+      return;
+    }
     playSound('start');
     setSessionStartTime(new Date());
     timer.start();
@@ -60,6 +69,10 @@ const Index = () => {
 
   const handleSubmitQuantity = async (quantity: number) => {
     if (!sessionStartTime) return;
+    
+    // Prevent double submission
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     const endTime = new Date();
     setIsLoading(true);
@@ -83,7 +96,11 @@ const Index = () => {
 
       timer.reset();
       setSessionStartTime(null);
-      setShowQuantityDialog(false);
+      
+      // Close dialog after a short delay to ensure toast appears on top
+      setTimeout(() => {
+        setShowQuantityDialog(false);
+      }, 100);
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -92,6 +109,7 @@ const Index = () => {
       });
     } finally {
       setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
