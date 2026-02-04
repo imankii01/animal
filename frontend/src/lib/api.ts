@@ -90,3 +90,35 @@ export async function healthCheck(): Promise<boolean> {
     return false;
   }
 }
+
+export async function updateSession(
+  id: string,
+  payload: Partial<CreateSessionPayload>
+): Promise<MilkingSession> {
+  const response = await fetch(`${API_BASE_URL}/api/sessions/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to update session: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function deleteSession(id: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/api/sessions/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete session: ${response.statusText}`);
+  }
+}
