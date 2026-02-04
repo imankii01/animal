@@ -8,11 +8,11 @@ A delightful dairy milking session tracker that plays soothing music while you m
 
 ## 🌐 Live Demo
 
-| Service | URL |
-|---------|-----|
-| **Frontend** | [https://moo-music-tracker.hearu.fun](https://moo-music-tracker.hearu.fun) |
+| Service         | URL                                                                                |
+| --------------- | ---------------------------------------------------------------------------------- |
+| **Frontend**    | [https://moo-music-tracker.hearu.fun](https://moo-music-tracker.hearu.fun)         |
 | **Backend API** | [https://api.moo-music-tracker.hearu.fun](https://api.moo-music-tracker.hearu.fun) |
-| **CloudFront** | [https://d2kqgenprqm3vi.cloudfront.net](https://d2kqgenprqm3vi.cloudfront.net) |
+| **CloudFront**  | [https://d2kqgenprqm3vi.cloudfront.net](https://d2kqgenprqm3vi.cloudfront.net)     |
 
 ---
 
@@ -23,20 +23,21 @@ Import the Postman collection to test all API endpoints:
 **[📥 Download Postman Collection](./backend/POSTMAN_COLLECTION.json)**
 
 Or import directly using this URL:
+
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/moo-music-tracker/main/backend/POSTMAN_COLLECTION.json
+https://github.com/imankii01/animal/blob/main/backend/POSTMAN_COLLECTION.json
 ```
 
 ### API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/sessions` | Get all milking sessions |
-| `GET` | `/api/sessions/:id` | Get a specific session |
-| `POST` | `/api/sessions` | Create a new session |
-| `PUT` | `/api/sessions/:id` | Update a session |
-| `DELETE` | `/api/sessions/:id` | Delete a session |
-| `GET` | `/health` | Health check endpoint |
+| Method   | Endpoint            | Description              |
+| -------- | ------------------- | ------------------------ |
+| `GET`    | `/api/sessions`     | Get all milking sessions |
+| `GET`    | `/api/sessions/:id` | Get a specific session   |
+| `POST`   | `/api/sessions`     | Create a new session     |
+| `PUT`    | `/api/sessions/:id` | Update a session         |
+| `DELETE` | `/api/sessions/:id` | Delete a session         |
+| `GET`    | `/health`           | Health check endpoint    |
 
 ---
 
@@ -52,8 +53,8 @@ https://raw.githubusercontent.com/YOUR_USERNAME/moo-music-tracker/main/backend/P
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/moo-music-tracker.git
-cd moo-music-tracker
+git clone https://github.com/imankii01/animal.git
+cd animal
 ```
 
 ---
@@ -133,7 +134,7 @@ FRONTEND_URL=http://localhost:5173
 ## 🏗️ Project Structure
 
 ```
-moo-music-tracker/
+animal/
 ├── frontend/                 # React + Vite frontend
 │   ├── src/
 │   │   ├── components/       # UI components
@@ -172,6 +173,7 @@ moo-music-tracker/
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **React 18** - UI library
 - **Vite** - Build tool
 - **TailwindCSS** - Styling
@@ -181,6 +183,7 @@ moo-music-tracker/
 - **React Router** - Routing
 
 ### Backend
+
 - **Node.js** - Runtime
 - **Express** - Web framework
 - **MongoDB** - Database
@@ -188,6 +191,7 @@ moo-music-tracker/
 - **PM2** - Process manager (production)
 
 ### Infrastructure
+
 - **AWS S3** - Frontend hosting
 - **AWS CloudFront** - CDN
 - **AWS EC2** - Backend hosting
@@ -237,12 +241,14 @@ pm2 restart ecosystem.config.js --env production
 ## 🧪 Testing
 
 ### Frontend Tests
+
 ```bash
 cd frontend
 npm run test
 ```
 
 ### Backend API Testing
+
 ```bash
 cd backend
 ./test-api.sh
@@ -267,4 +273,5 @@ This project is licensed under the MIT License.
 - Music tracks from royalty-free sources
 - Cow icon and animations
 - shadcn/ui for beautiful components
+
 # animal
