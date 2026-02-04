@@ -160,8 +160,8 @@ export function EditSessionDialog({
               <label className="text-sm font-medium text-foreground">{t.startTime}</label>
               <Input
                 type="datetime-local"
-                value={formData.start_time.slice(0, 16)}
-                onChange={(e) => setFormData({ ...formData, start_time: e.target.value })}
+                value={formData.start_time ? new Date(formData.start_time).toISOString().slice(0, 16) : ''}
+                onChange={(e) => setFormData({ ...formData, start_time: new Date(e.target.value).toISOString() })}
                 className={errors.start_time ? 'border-destructive' : ''}
               />
               {errors.start_time && (
@@ -174,8 +174,8 @@ export function EditSessionDialog({
               <label className="text-sm font-medium text-foreground">{t.endTime}</label>
               <Input
                 type="datetime-local"
-                value={formData.end_time.slice(0, 16)}
-                onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
+                value={formData.end_time ? new Date(formData.end_time).toISOString().slice(0, 16) : ''}
+                onChange={(e) => setFormData({ ...formData, end_time: new Date(e.target.value).toISOString() })}
                 className={errors.end_time ? 'border-destructive' : ''}
               />
               {errors.end_time && <p className="text-xs text-destructive">{errors.end_time}</p>}
