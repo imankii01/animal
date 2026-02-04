@@ -267,3 +267,4 @@ This project is licensed under the MIT License.
 - Music tracks from royalty-free sources
 - Cow icon and animations
 - shadcn/ui for beautiful components
+# animal
