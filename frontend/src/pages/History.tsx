@@ -94,67 +94,67 @@ export default function History() {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <motion.header 
-        className="p-4 md:p-6 border-b border-border"
+        className="p-3 sm:p-4 md:p-6 border-b border-border"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex items-center gap-4 max-w-5xl mx-auto">
+        <div className="flex items-center gap-3 sm:gap-4 max-w-5xl mx-auto">
           <Link to="/">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <ArrowLeft className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 sm:h-10 sm:w-10">
+              <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Milking History</h1>
-            <p className="text-sm text-muted-foreground">View all your past milking sessions</p>
+            <h1 className="text-lg sm:text-2xl font-bold text-foreground">Milking History</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground">View all your past milking sessions</p>
           </div>
         </div>
       </motion.header>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-6">
-        <div className="max-w-5xl mx-auto space-y-6">
+      <main className="flex-1 p-3 sm:p-4 md:p-6">
+        <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
           {/* Stats Cards */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card">
-                <CardContent className="pt-4 pb-4">
-                  <Calendar className="h-5 w-5 text-primary mb-2" />
-                  <p className="text-3xl font-bold text-foreground">{calculatedStats.totalSessions || 0}</p>
-                  <p className="text-sm text-muted-foreground">Total Sessions</p>
+                <CardContent className="p-3 sm:pt-4 sm:pb-4">
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
+                  <p className="text-xl sm:text-3xl font-bold text-foreground">{calculatedStats.totalSessions || 0}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Sessions</p>
                 </CardContent>
               </Card>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card">
-                <CardContent className="pt-4 pb-4">
-                  <Milk className="h-5 w-5 text-primary mb-2" />
-                  <p className="text-3xl font-bold text-foreground">{(calculatedStats.totalMilk || 0).toFixed(1)}L</p>
-                  <p className="text-sm text-muted-foreground">Total Milk</p>
+                <CardContent className="p-3 sm:pt-4 sm:pb-4">
+                  <Milk className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
+                  <p className="text-xl sm:text-3xl font-bold text-foreground">{(calculatedStats.totalMilk || 0).toFixed(1)}L</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Milk</p>
                 </CardContent>
               </Card>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card">
-                <CardContent className="pt-4 pb-4">
-                  <Timer className="h-5 w-5 text-primary mb-2" />
-                  <p className="text-3xl font-bold text-foreground">{totalMinutes || 0}m</p>
-                  <p className="text-sm text-muted-foreground">Total Time</p>
+                <CardContent className="p-3 sm:pt-4 sm:pb-4">
+                  <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
+                  <p className="text-xl sm:text-3xl font-bold text-foreground">{totalMinutes || 0}m</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Time</p>
                 </CardContent>
               </Card>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card">
-                <CardContent className="pt-4 pb-4">
-                  <Clock className="h-5 w-5 text-primary mb-2" />
-                  <p className="text-3xl font-bold text-foreground">{(calculatedStats.avgMilkPerSession || 0).toFixed(1)}L</p>
-                  <p className="text-sm text-muted-foreground">Avg per Session</p>
+                <CardContent className="p-3 sm:pt-4 sm:pb-4">
+                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
+                  <p className="text-xl sm:text-3xl font-bold text-foreground">{(calculatedStats.avgMilkPerSession || 0).toFixed(1)}L</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Avg per Session</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -189,11 +189,11 @@ export default function History() {
                     <Table>
                       <TableHeader>
                         <TableRow className="border-b border-border">
-                          <TableHead className="text-muted-foreground font-medium">Date</TableHead>
-                          <TableHead className="text-muted-foreground font-medium">Start Time</TableHead>
-                          <TableHead className="text-muted-foreground font-medium">End Time</TableHead>
-                          <TableHead className="text-muted-foreground font-medium">Duration</TableHead>
-                          <TableHead className="text-right text-muted-foreground font-medium">Milk Collected</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Date</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">Start Time</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">End Time</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Duration</TableHead>
+                          <TableHead className="text-right text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Milk</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -205,19 +205,19 @@ export default function History() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1, duration: 0.3 }}
                           >
-                            <TableCell className="font-medium text-foreground">
+                            <TableCell className="font-medium text-foreground text-xs sm:text-sm whitespace-nowrap">
                               {formatDate(session.start_time)}
                             </TableCell>
-                            <TableCell className="text-muted-foreground">
+                            <TableCell className="text-muted-foreground text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">
                               {formatTime(session.start_time)}
                             </TableCell>
-                            <TableCell className="text-muted-foreground">
+                            <TableCell className="text-muted-foreground text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">
                               {formatTime(session.end_time)}
                             </TableCell>
-                            <TableCell className="text-muted-foreground">
+                            <TableCell className="text-muted-foreground text-xs sm:text-sm whitespace-nowrap">
                               {formatDuration(session.duration)}
                             </TableCell>
-                            <TableCell className="text-right font-semibold text-primary">
+                            <TableCell className="text-right font-semibold text-primary text-xs sm:text-sm whitespace-nowrap">
                               {(session.milk_quantity || 0).toFixed(2)} L
                             </TableCell>
                           </motion.tr>

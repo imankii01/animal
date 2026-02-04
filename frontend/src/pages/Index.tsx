@@ -102,10 +102,10 @@ const Index = () => {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 pb-12 sm:pb-20">
           {/* Cow Icon - Spinning entrance animation */}
           <motion.div 
-            className="w-28 h-28 rounded-full bg-primary flex items-center justify-center mb-8"
+            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-primary flex items-center justify-center mb-6 sm:mb-8"
             initial={{ scale: 0, rotate: -180, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             transition={{ 
@@ -116,7 +116,7 @@ const Index = () => {
             }}
           >
             <motion.span 
-              className="text-5xl"
+              className="text-3xl sm:text-5xl"
               animate={{ 
                 rotate: [0, 10, -10, 0],
               }}
@@ -133,7 +133,7 @@ const Index = () => {
 
           {/* Title */}
           <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -142,7 +142,7 @@ const Index = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-muted-foreground text-center max-w-md mb-10"
+            className="text-sm sm:text-base text-muted-foreground text-center max-w-xs sm:max-w-md mb-6 sm:mb-10 px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -161,35 +161,35 @@ const Index = () => {
             <Button 
               size="lg" 
               onClick={handleStart}
-              className="gap-3 text-lg px-10 py-7 rounded-xl shadow-lg hover:shadow-xl transition-all"
+              className="gap-2 sm:gap-3 text-base sm:text-lg px-6 sm:px-10 py-5 sm:py-7 rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
-              <Play className="h-5 w-5" fill="currentColor" />
+              <Play className="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" />
               Start Milking
             </Button>
           </motion.div>
 
           {/* Feature Cards */}
           <motion.div 
-            className="grid grid-cols-2 gap-4 mt-16 w-full max-w-md"
+            className="grid grid-cols-2 gap-3 sm:gap-4 mt-8 sm:mt-16 w-full max-w-xs sm:max-w-md"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card border-border">
-                <CardContent className="pt-6">
-                  <Music className="h-6 w-6 text-accent mb-3" />
-                  <h3 className="font-semibold text-foreground mb-1">Calming Music</h3>
-                  <p className="text-sm text-muted-foreground">Relaxing sounds for stress-free milking</p>
+                <CardContent className="p-3 sm:pt-6 sm:px-6">
+                  <Music className="h-5 w-5 sm:h-6 sm:w-6 text-accent mb-2 sm:mb-3" />
+                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Calming Music</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Relaxing sounds for stress-free milking</p>
                 </CardContent>
               </Card>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
               <Card className="bg-card border-border">
-                <CardContent className="pt-6">
-                  <Clock className="h-6 w-6 text-accent mb-3" />
-                  <h3 className="font-semibold text-foreground mb-1">Session Timer</h3>
-                  <p className="text-sm text-muted-foreground">Track duration with precision</p>
+                <CardContent className="p-3 sm:pt-6 sm:px-6">
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-accent mb-2 sm:mb-3" />
+                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Session Timer</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Track duration with precision</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -198,14 +198,14 @@ const Index = () => {
 
         {/* Footer */}
         <motion.footer 
-          className="p-6 text-center"
+          className="p-4 sm:p-6 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
         >
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-            <Music className="h-4 w-4" />
-            Studies show calming music can increase milk yield by up to 3%
+          <p className="text-xs sm:text-sm text-muted-foreground flex items-center justify-center gap-2 px-2">
+            <Music className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+            <span>Studies show calming music can increase milk yield by up to 3%</span>
           </p>
         </motion.footer>
 
@@ -221,10 +221,10 @@ const Index = () => {
 
   // Active session view
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 sm:px-6">
       {/* Timer Circle with pulse animation */}
       <motion.div 
-        className="w-72 h-72 md:w-80 md:h-80 rounded-full bg-primary flex flex-col items-center justify-center shadow-xl mb-10"
+        className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full bg-primary flex flex-col items-center justify-center shadow-xl mb-6 sm:mb-10"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ 
@@ -236,8 +236,8 @@ const Index = () => {
       >
         {/* Pulsing ring effect */}
         <motion.div
-          className="absolute w-72 h-72 md:w-80 md:h-80 rounded-full border-4 border-primary/30"
-          animate={{ 
+          className="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full border-4 border-primary/30"
+          animate={ 
             scale: [1, 1.1, 1],
             opacity: [0.5, 0, 0.5]
           }}
@@ -260,7 +260,7 @@ const Index = () => {
 
       {/* Control Buttons */}
       <motion.div 
-        className="flex gap-4 w-full max-w-md"
+        className="flex gap-3 sm:gap-4 w-full max-w-xs sm:max-w-md px-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -271,9 +271,9 @@ const Index = () => {
               size="lg" 
               variant="secondary"
               onClick={handleResume}
-              className="w-full gap-2 text-lg py-7 rounded-xl"
+              className="w-full gap-2 text-base sm:text-lg py-5 sm:py-7 rounded-xl"
             >
-              <Play className="h-5 w-5" />
+              <Play className="h-4 w-4 sm:h-5 sm:w-5" />
               Resume
             </Button>
           </motion.div>
@@ -283,9 +283,9 @@ const Index = () => {
               size="lg" 
               variant="secondary"
               onClick={handlePause}
-              className="w-full gap-2 text-lg py-7 rounded-xl"
+              className="w-full gap-2 text-base sm:text-lg py-5 sm:py-7 rounded-xl"
             >
-              <Pause className="h-5 w-5" />
+              <Pause className="h-4 w-4 sm:h-5 sm:w-5" />
               Pause
             </Button>
           </motion.div>
@@ -295,9 +295,9 @@ const Index = () => {
             size="lg" 
             variant="destructive"
             onClick={handleStop}
-            className="w-full gap-2 text-lg py-7 rounded-xl"
+            className="w-full gap-2 text-base sm:text-lg py-5 sm:py-7 rounded-xl"
           >
-            <Square className="h-5 w-5" />
+            <Square className="h-4 w-4 sm:h-5 sm:w-5" />
             Stop
           </Button>
         </motion.div>

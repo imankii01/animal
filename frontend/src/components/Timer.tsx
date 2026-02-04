@@ -14,7 +14,7 @@ export function Timer({ seconds, className }: TimerProps) {
 
   return (
     <motion.div 
-      className={cn('font-mono text-6xl md:text-7xl font-bold tracking-tight', className)}
+      className={cn('font-mono text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight', className)}
       animate={{ 
         scale: [1, 1.02, 1],
       }}

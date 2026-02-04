@@ -44,17 +44,17 @@ export function MilkQuantityDialog({ open, onSubmit, onCancel, duration }: MilkQ
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-[calc(100%-2rem)] sm:max-w-md rounded-lg mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-primary">Session Complete! 🐄</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-primary text-lg sm:text-xl">Session Complete! 🐄</DialogTitle>
+          <DialogDescription className="text-sm">
             Great job! Session duration: <strong>{formatDuration(duration)}</strong>
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
-          <div className="space-y-4 py-4">
+          <div className="space-y-4 py-3 sm:py-4">
             <div className="space-y-2">
-              <Label htmlFor="quantity">Milk Collected (liters)</Label>
+              <Label htmlFor="quantity" className="text-sm">Milk Collected (liters)</Label>
               <Input
                 id="quantity"
                 type="number"
@@ -67,15 +67,16 @@ export function MilkQuantityDialog({ open, onSubmit, onCancel, duration }: MilkQ
                   setError('');
                 }}
                 autoFocus
+                className="h-11 text-base"
               />
-              {error && <p className="text-sm text-destructive">{error}</p>}
+              {error && <p className="text-xs sm:text-sm text-destructive">{error}</p>}
             </div>
           </div>
-          <DialogFooter className="gap-2">
-            <Button type="button" variant="outline" onClick={onCancel}>
+          <DialogFooter className="gap-2 flex-col sm:flex-row">
+            <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit">Save Session</Button>
+            <Button type="submit" className="w-full sm:w-auto">Save Session</Button>
           </DialogFooter>
         </form>
       </DialogContent>
