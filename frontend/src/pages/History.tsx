@@ -14,6 +14,8 @@ import {
 import { getSessions, getStats, MilkingSession, StatsResponse } from '@/lib/api';
 import { ArrowLeft, Calendar, Milk, Timer, Clock, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { SkeletonStats, SkeletonTable } from '@/components/Skeleton';
 
 export default function History() {
   const { toast } = useToast();
@@ -111,10 +113,11 @@ export default function History() {
               <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </Link>
-          <div>
+          <div className="flex-1">
             <h1 className="text-lg sm:text-2xl font-bold text-foreground">Milking History</h1>
             <p className="text-xs sm:text-sm text-muted-foreground">View all your past milking sessions</p>
           </div>
+          <ThemeToggle />
         </div>
       </motion.header>
 
@@ -183,9 +186,7 @@ export default function History() {
             <Card className="glass-card border-0 overflow-hidden">
               <CardContent className="p-0">
                 {isLoading ? (
-                  <div className="flex items-center justify-center py-16">
-                    <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-                  </div>
+                  <SkeletonTable rows={5} />
                 ) : error ? (
                   <div className="text-center py-16">
                     <p className="text-destructive mb-4">{error}</p>
@@ -214,7 +215,7 @@ export default function History() {
                         {sessions.map((session, index) => (
                           <motion.tr 
                             key={session._id} 
-                            className="border-b border-border last:border-0"
+                            className={`border-b border-border last:border-0 table-row-hover transition-colors ${index % 2 === 0 ? 'table-row-even' : ''}`}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1, duration: 0.3 }}

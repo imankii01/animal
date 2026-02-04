@@ -10,6 +10,7 @@ import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { createSession } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 import { Play, Pause, Square, Clock, Music, Volume2, History, Sparkles } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Index = () => {
   const { toast } = useToast();
@@ -108,7 +109,9 @@ const Index = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
+            className="flex items-center gap-2"
           >
+            <ThemeToggle />
             <Link to="/history">
               <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/80">
                 <History className="h-4 w-4" />

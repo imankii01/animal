@@ -4,88 +4,95 @@
 
 /* Milking Tracker Design System
    Warm, pastoral theme with sage greens and cream tones
+   More vibrant color palette with glass effects
    All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 40 30% 96%;
-    --foreground: 30 10% 20%;
+    --background: 40 35% 97%;
+    --foreground: 25 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 30 10% 20%;
+    --card-foreground: 25 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 30 10% 20%;
+    --popover-foreground: 25 15% 15%;
 
-    --primary: 145 30% 42%;
+    --primary: 152 45% 38%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 30% 92%;
-    --secondary-foreground: 30 10% 25%;
+    --secondary: 38 40% 92%;
+    --secondary-foreground: 25 15% 20%;
 
-    --muted: 40 20% 92%;
-    --muted-foreground: 30 10% 50%;
+    --muted: 40 25% 92%;
+    --muted-foreground: 25 12% 45%;
 
-    --accent: 30 60% 55%;
-    --accent-foreground: 30 10% 20%;
+    --accent: 28 75% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 5 55% 55%;
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 20% 88%;
-    --input: 40 20% 88%;
-    --ring: 145 30% 42%;
+    --border: 40 25% 86%;
+    --input: 40 25% 86%;
+    --ring: 152 45% 38%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 40 25% 95%;
-    --sidebar-foreground: 30 10% 25%;
-    --sidebar-primary: 145 30% 42%;
+    --sidebar-background: 40 30% 96%;
+    --sidebar-foreground: 25 15% 20%;
+    --sidebar-primary: 152 45% 38%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 35 30% 90%;
-    --sidebar-accent-foreground: 30 10% 20%;
-    --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 145 30% 50%;
+    --sidebar-accent: 38 40% 90%;
+    --sidebar-accent-foreground: 25 15% 15%;
+    --sidebar-border: 40 25% 86%;
+    --sidebar-ring: 152 45% 45%;
   }
 
   .dark {
-    --background: 30 15% 10%;
-    --foreground: 40 20% 95%;
+    --background: 25 20% 8%;
+    --foreground: 40 25% 95%;
 
-    --card: 30 12% 14%;
-    --card-foreground: 40 20% 95%;
+    --card: 25 18% 12%;
+    --card-foreground: 40 25% 95%;
 
-    --popover: 30 12% 14%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 25 18% 12%;
+    --popover-foreground: 40 25% 95%;
 
-    --primary: 145 35% 50%;
-    --primary-foreground: 30 15% 10%;
+    --primary: 152 50% 45%;
+    --primary-foreground: 25 20% 8%;
 
-    --secondary: 30 15% 20%;
-    --secondary-foreground: 40 20% 95%;
+    --secondary: 25 18% 18%;
+    --secondary-foreground: 40 25% 95%;
 
-    --muted: 30 12% 18%;
-    --muted-foreground: 40 15% 60%;
+    --muted: 25 15% 16%;
+    --muted-foreground: 40 20% 55%;
 
-    --accent: 30 50% 45%;
-    --accent-foreground: 40 20% 95%;
+    --accent: 28 65% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 5 50% 40%;
-    --destructive-foreground: 40 20% 95%;
+    --success: 152 55% 45%;
+    --success-foreground: 25 20% 8%;
 
-    --border: 30 12% 22%;
-    --input: 30 12% 22%;
-    --ring: 145 35% 50%;
+    --destructive: 0 55% 45%;
+    --destructive-foreground: 40 25% 95%;
 
-    --sidebar-background: 30 12% 12%;
-    --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 145 35% 50%;
-    --sidebar-primary-foreground: 30 15% 10%;
-    --sidebar-accent: 30 15% 22%;
-    --sidebar-accent-foreground: 40 20% 95%;
-    --sidebar-border: 30 12% 20%;
-    --sidebar-ring: 145 35% 55%;
+    --border: 25 15% 20%;
+    --input: 25 15% 20%;
+    --ring: 152 50% 45%;
+
+    --sidebar-background: 25 18% 10%;
+    --sidebar-foreground: 40 25% 92%;
+    --sidebar-primary: 152 50% 45%;
+    --sidebar-primary-foreground: 25 20% 8%;
+    --sidebar-accent: 25 18% 20%;
+    --sidebar-accent-foreground: 40 25% 95%;
+    --sidebar-border: 25 15% 18%;
+    --sidebar-ring: 152 50% 50%;
   }
 }
 
@@ -97,27 +104,87 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer utilities {
+  /* Glass morphism effects */
   .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20;
+    @apply bg-white/60 backdrop-blur-xl border border-white/30 shadow-lg;
   }
   
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md shadow-lg border border-white/40;
+    @apply bg-white/75 backdrop-blur-md shadow-lg border border-white/50;
+  }
+
+  .dark .glass {
+    @apply bg-black/40 border-white/10;
   }
   
+  .dark .glass-card {
+    @apply bg-black/50 border-white/10;
+  }
+  
+  /* Text gradients */
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent;
+  }
   
+  /* Shadow utilities */
   .shadow-soft {
     box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
   }
+
+  .dark .shadow-soft {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 2px 8px -2px rgba(0, 0, 0, 0.2);
+  }
   
   .shadow-glow {
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.35);
+  }
+
+  .shadow-glow-accent {
+    box-shadow: 0 0 40px -10px hsl(var(--accent) / 0.35);
+  }
+
+  /* Skeleton loading animation */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  .skeleton-text {
+    @apply h-4 skeleton rounded-full;
+  }
+
+  .skeleton-title {
+    @apply h-6 skeleton rounded-full;
+  }
+
+  .skeleton-circle {
+    @apply skeleton rounded-full;
+  }
+
+  /* Table row hover and alternating */
+  .table-row-hover {
+    @apply transition-colors hover:bg-muted/50;
+  }
+
+  .table-row-even {
+    @apply bg-muted/20;
+  }
+
+  .dark .table-row-even {
+    @apply bg-muted/10;
+  }
+
+  /* Smooth transitions */
+  .transition-theme {
+    @apply transition-colors duration-300 ease-in-out;
   }
 }
