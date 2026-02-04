@@ -14,11 +14,14 @@ import {
 import { getSessions, getStats, MilkingSession, StatsResponse } from '@/lib/api';
 import { ArrowLeft, Calendar, Milk, Timer, Clock, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { LanguageToggle } from '@/components/LanguageToggle';
 import { SkeletonStats, SkeletonTable } from '@/components/Skeleton';
 
 export default function History() {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [sessions, setSessions] = useState<MilkingSession[]>([]);
   const [stats, setStats] = useState<StatsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +69,7 @@ export default function History() {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: false,
+      hour12: true,
     });
   };
 
@@ -114,9 +117,10 @@ export default function History() {
             </Button>
           </Link>
           <div className="flex-1">
-            <h1 className="text-lg sm:text-2xl font-bold text-foreground">Milking History</h1>
-            <p className="text-xs sm:text-sm text-muted-foreground">View all your past milking sessions</p>
+            <h1 className="text-lg sm:text-2xl font-bold text-foreground">{t.milkingHistory}</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground">{t.viewAllSessions}</p>
           </div>
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </motion.header>
@@ -138,7 +142,7 @@ export default function History() {
                     <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   </div>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">{calculatedStats.totalSessions || 0}</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Sessions</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t.totalSessions}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -149,7 +153,7 @@ export default function History() {
                     <Milk className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                   </div>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">{(calculatedStats.totalMilk || 0).toFixed(1)}L</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Milk</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t.totalMilk}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -160,7 +164,7 @@ export default function History() {
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   </div>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">{totalMinutes || 0}m</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Time</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t.totalTime}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -171,7 +175,7 @@ export default function History() {
                     <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                   </div>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">{(calculatedStats.avgMilkPerSession || 0).toFixed(1)}L</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Avg per Session</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t.avgPerSession}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -191,24 +195,24 @@ export default function History() {
                   <div className="text-center py-16">
                     <p className="text-destructive mb-4">{error}</p>
                     <Button onClick={fetchData} variant="outline">
-                      Try Again
+                      {t.tryAgain}
                     </Button>
                   </div>
                 ) : sessions.length === 0 ? (
                   <div className="text-center py-16 text-muted-foreground">
-                    <p className="text-lg mb-2">No sessions yet!</p>
-                    <p className="text-sm">Start your first milking session to see records here.</p>
+                    <p className="text-lg mb-2">{t.noSessionsYet}</p>
+                    <p className="text-sm">{t.startFirstSession}</p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow className="border-b border-border">
-                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Date</TableHead>
-                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">Start Time</TableHead>
-                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">End Time</TableHead>
-                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Duration</TableHead>
-                          <TableHead className="text-right text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">Milk</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">{t.date}</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">{t.startTime}</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap hidden sm:table-cell">{t.endTime}</TableHead>
+                          <TableHead className="text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">{t.duration}</TableHead>
+                          <TableHead className="text-right text-muted-foreground font-medium text-xs sm:text-sm whitespace-nowrap">{t.milk}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>

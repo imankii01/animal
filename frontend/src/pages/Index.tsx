@@ -8,17 +8,23 @@ import { TimerRing } from '@/components/TimerRing';
 import { MilkQuantityDialog } from '@/components/MilkQuantityDialog';
 import { useTimer } from '@/hooks/useTimer';
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 import { createSession } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
-import { Play, Pause, Square, Clock, Music, Volume2, History, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Play, Pause, Square, Clock, Music, History, Sparkles, Volume2 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { FloatingParticles } from '@/components/FloatingParticles';
 import { triggerMilkConfetti } from '@/components/Confetti';
+import { VolumeControl } from '@/components/VolumeControl';
+import { LanguageToggle } from '@/components/LanguageToggle';
 
 const Index = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const timer = useTimer();
   const audio = useAudioPlayer();
+  const { playSound } = useSoundEffects();
   
   const [showQuantityDialog, setShowQuantityDialog] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
@@ -26,22 +32,26 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleStart = () => {
+    playSound('start');
     setSessionStartTime(new Date());
     timer.start();
     audio.play();
   };
 
   const handlePause = () => {
+    playSound('pause');
     timer.pause();
     audio.pause();
   };
 
   const handleResume = () => {
+    playSound('resume');
     timer.resume();
     audio.play();
   };
 
   const handleStop = () => {
+    playSound('stop');
     const duration = timer.stop();
     setFinalDuration(duration);
     audio.stop();
@@ -62,9 +72,10 @@ const Index = () => {
         milk_quantity: quantity,
       });
 
+      playSound('success');
       toast({
-        title: 'Session Saved! 🎉',
-        description: `Recorded ${quantity}L of milk in ${Math.floor(finalDuration / 60)}m ${finalDuration % 60}s`,
+        title: t.sessionSaved,
+        description: `${t.recorded} ${quantity}L in ${Math.floor(finalDuration / 60)}m ${finalDuration % 60}s`,
       });
 
       // Trigger celebration confetti
@@ -76,8 +87,8 @@ const Index = () => {
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Error saving session',
-        description: error instanceof Error ? error.message : 'Please check your API connection',
+        title: t.errorSaving,
+        description: error instanceof Error ? error.message : t.checkConnection,
       });
     } finally {
       setIsLoading(false);
@@ -112,19 +123,20 @@ const Index = () => {
             className="flex items-center gap-2"
           >
             <span className="text-xl">🐄</span>
-            <span className="font-semibold text-foreground hidden sm:inline">Moo Music</span>
+            <span className="font-semibold text-foreground hidden sm:inline">{t.appName}</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 sm:gap-3"
           >
+            <LanguageToggle />
             <ThemeToggle />
             <Link to="/history">
               <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/80">
                 <History className="h-4 w-4" />
-                <span className="hidden sm:inline">View History</span>
+                <span className="hidden sm:inline">{t.viewHistory}</span>
               </Button>
             </Link>
           </motion.div>
@@ -172,7 +184,7 @@ const Index = () => {
               Milking <span className="text-gradient">Tracker</span>
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground max-w-xs sm:max-w-md px-2">
-              Track your milking sessions with soothing music for happier, more productive cattle
+              {t.tagline}
             </p>
           </motion.div>
 
@@ -190,7 +202,7 @@ const Index = () => {
               className="gap-2 sm:gap-3 text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 rounded-2xl shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
             >
               <Play className="h-5 w-5 sm:h-6 sm:w-6" fill="currentColor" />
-              Start Milking
+              {t.startMilking}
             </Button>
           </motion.div>
 
@@ -207,8 +219,8 @@ const Index = () => {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
                     <Music className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Calming Music</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">Relaxing sounds for stress-free milking</p>
+                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">{t.calmingMusic}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{t.calmingMusicDesc}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -218,8 +230,8 @@ const Index = () => {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                     <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Session Timer</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">Track duration with precision timing</p>
+                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">{t.sessionTimer}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{t.sessionTimerDesc}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -236,7 +248,7 @@ const Index = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-sm">
             <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-accent" />
             <p className="text-xs sm:text-sm text-muted-foreground">
-              Calming music can increase milk yield by up to 3%
+              {t.funFact}
             </p>
           </div>
         </motion.footer>
@@ -293,7 +305,7 @@ const Index = () => {
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               <Music className="h-4 w-4" />
-              <span className="text-xs sm:text-sm font-medium">Milking in progress...</span>
+              <span className="text-xs sm:text-sm font-medium">{t.milkingInProgress}</span>
             </motion.div>
           </div>
         </TimerRing>
@@ -315,7 +327,7 @@ const Index = () => {
               className="w-full gap-2 text-base sm:text-lg py-6 sm:py-7 rounded-2xl shadow-soft hover:shadow-lg transition-all"
             >
               <Play className="h-5 w-5" />
-              Resume
+              {t.resume}
             </Button>
           </motion.div>
         ) : (
@@ -327,7 +339,7 @@ const Index = () => {
               className="w-full gap-2 text-base sm:text-lg py-6 sm:py-7 rounded-2xl shadow-soft hover:shadow-lg transition-all"
             >
               <Pause className="h-5 w-5" />
-              Pause
+              {t.pause}
             </Button>
           </motion.div>
         )}
@@ -339,15 +351,15 @@ const Index = () => {
             className="w-full gap-2 text-base sm:text-lg py-6 sm:py-7 rounded-2xl shadow-soft hover:shadow-lg transition-all"
           >
             <Square className="h-5 w-5" />
-            Stop
+            {t.stop}
           </Button>
         </motion.div>
       </motion.div>
 
-      {/* Volume indicator with better styling */}
+      {/* Volume control with slider */}
       {audio.isPlaying && (
         <motion.div 
-          className="mt-10 px-5 py-3 rounded-full bg-secondary/80 backdrop-blur-sm shadow-soft flex items-center gap-3"
+          className="mt-10 px-5 py-3 rounded-2xl bg-secondary/80 backdrop-blur-sm shadow-soft flex items-center gap-4"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 300 }}
@@ -356,9 +368,15 @@ const Index = () => {
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 0.5, repeat: Infinity }}
           >
-            <Volume2 className="h-5 w-5 text-primary" />
+            <Music className="h-5 w-5 text-primary" />
           </motion.div>
-          <span className="text-sm text-muted-foreground">Music playing</span>
+          <span className="text-sm text-muted-foreground">{t.musicPlaying}</span>
+          <VolumeControl
+            volume={audio.volume}
+            isMuted={audio.isMuted}
+            onVolumeChange={audio.setVolume}
+            onToggleMute={audio.toggleMute}
+          />
         </motion.div>
       )}
 

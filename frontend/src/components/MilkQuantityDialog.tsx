@@ -10,15 +10,18 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MilkQuantityDialogProps {
   open: boolean;
   onSubmit: (quantity: number) => void;
   onCancel: () => void;
   duration: number;
+  isLoading?: boolean;
 }
 
-export function MilkQuantityDialog({ open, onSubmit, onCancel, duration }: MilkQuantityDialogProps) {
+export function MilkQuantityDialog({ open, onSubmit, onCancel, duration, isLoading }: MilkQuantityDialogProps) {
+  const { t } = useLanguage();
   const [quantity, setQuantity] = useState('');
   const [error, setError] = useState('');
 
@@ -46,21 +49,21 @@ export function MilkQuantityDialog({ open, onSubmit, onCancel, duration }: MilkQ
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
       <DialogContent className="w-[calc(100%-2rem)] sm:max-w-md rounded-lg mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-primary text-lg sm:text-xl">Session Complete! 🐄</DialogTitle>
+          <DialogTitle className="text-primary text-lg sm:text-xl">{t.enterMilkQuantity} 🐄</DialogTitle>
           <DialogDescription className="text-sm">
-            Great job! Session duration: <strong>{formatDuration(duration)}</strong>
+            {t.howMuchMilk} {t.sessionDuration}: <strong>{formatDuration(duration)}</strong>
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="space-y-4 py-3 sm:py-4">
             <div className="space-y-2">
-              <Label htmlFor="quantity" className="text-sm">Milk Collected (liters)</Label>
+              <Label htmlFor="quantity" className="text-sm">{t.milk} (L)</Label>
               <Input
                 id="quantity"
                 type="number"
                 step="0.1"
                 min="0"
-                placeholder="e.g., 5.2"
+                placeholder={t.milkQuantityPlaceholder}
                 value={quantity}
                 onChange={(e) => {
                   setQuantity(e.target.value);
@@ -74,9 +77,11 @@ export function MilkQuantityDialog({ open, onSubmit, onCancel, duration }: MilkQ
           </div>
           <DialogFooter className="gap-2 flex-col sm:flex-row">
             <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">
-              Cancel
+              {t.cancel}
             </Button>
-            <Button type="submit" className="w-full sm:w-auto">Save Session</Button>
+            <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
+              {isLoading ? t.saving : t.saveSession}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
