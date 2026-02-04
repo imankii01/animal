@@ -36,6 +36,18 @@ export function LanguageToggle() {
         >
           हि
         </Button>
+        <Button
+          variant={language === 'pa' ? 'default' : 'ghost'}
+          size="sm"
+          onClick={() => setLanguage('pa')}
+          className={`rounded-full px-3 py-1 h-7 text-xs font-medium transition-all ${
+            language === 'pa' 
+              ? 'bg-primary text-primary-foreground shadow-sm' 
+              : 'hover:bg-secondary/80'
+          }`}
+        >
+          ਪਾ
+        </Button>
       </div>
     </motion.div>
   );

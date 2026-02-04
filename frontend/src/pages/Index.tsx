@@ -181,7 +181,7 @@ const Index = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
-              Milking <span className="text-gradient">Tracker</span>
+              {t.milkingTracker}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground max-w-xs sm:max-w-md px-2">
               {t.tagline}

@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
-type Language = 'en' | 'hi';
+type Language = 'en' | 'hi' | 'pa';
 
 interface Translations {
   // Landing page
   appName: string;
+  milkingTracker: string;
   tagline: string;
   startMilking: string;
   viewHistory: string;
@@ -63,6 +64,7 @@ const translations: Record<Language, Translations> = {
   en: {
     // Landing page
     appName: 'Moo Music',
+    milkingTracker: 'Milking Tracker',
     tagline: 'Track your milking sessions with soothing music for happier, more productive cattle',
     startMilking: 'Start Milking',
     viewHistory: 'View History',
@@ -119,6 +121,7 @@ const translations: Record<Language, Translations> = {
   hi: {
     // Landing page
     appName: 'मू म्यूजिक',
+    milkingTracker: 'दूध निकालना ट्रैकर',
     tagline: 'खुश और अधिक उत्पादक पशुओं के लिए सुखदायक संगीत के साथ अपने दूध निकालने के सत्र को ट्रैक करें',
     startMilking: 'दूध निकालना शुरू करें',
     viewHistory: 'इतिहास देखें',
@@ -172,6 +175,63 @@ const translations: Record<Language, Translations> = {
     soundEffects: 'ध्वनि प्रभाव',
     volume: 'वॉल्यूम',
   },
+  pa: {
+    // Landing page
+    appName: 'Moo ਸੰਗੀਤ',
+    milkingTracker: 'ਦਾ ਕੱਢਣ ਟ੍ਰੈਕਰ',
+    tagline: 'ਸੁਖਮਈ ਸੰਗੀਤ ਦੇ ਨਾਲ ਆਪਣੇ ਦਾ ਕੱਢਣ ਦੇ ਸਮੇਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ ਤਾਂ ਜੋ ਮਵੇਸ਼ੀ ਖੁਸ਼ ਅਤੇ ਵੱਧ ਉਤਪਾਦਕ ਹੋਣ',
+    startMilking: 'ਦਾ ਕੱਢਣਾ ਸ਼ੁਰੂ ਕਰੋ',
+    viewHistory: 'ਇਤਿਹਾਸ ਵੇਖੋ',
+    calmingMusic: 'ਸੁਖਮਈ ਸੰਗੀਤ',
+    calmingMusicDesc: 'ਤਣਾਅ-ਮੁਕ্ত ਦਾ ਕੱਢਣ ਲਈ ਆਰਾਮਦਾਇਕ ਆਵਾਜ਼',
+    sessionTimer: 'ਸੈਸ਼ਨ ਟਾਈਮਰ',
+    sessionTimerDesc: 'ਸ਼ੁੱਧ ਸਮੇ ਦੇ ਨਾਲ ਮਿਆਦ ਦਾ ਪਤਾ ਕਰੋ',
+    funFact: 'ਸੁਖਮਈ ਸੰਗੀਤ ਦਾ ਉਤਪਾਦ 3% ਤੱਕ ਵਧ ਸਕਦਾ ਹੈ',
+    
+    // Active session
+    milkingInProgress: 'ਦਾ ਕੱਢਣਾ ਜਾਰੀ ਹੈ...',
+    pause: 'ਰੋਕੋ',
+    resume: 'ਜਾਰੀ ਰਖੋ',
+    stop: 'ਬੰਦ ਕਰੋ',
+    musicPlaying: 'ਸੰਗੀਤ ਚੱਲ ਰਿਹਾ ਹੈ',
+    
+    // Dialog
+    enterMilkQuantity: 'ਦਾ ਦੀ ਮਾਤਰਾ ਦਰਜ ਕਰੋ',
+    howMuchMilk: 'ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕਿੰਨਾ ਦਾ ਇਕੱਠਾ ਹੋਇਆ?',
+    sessionDuration: 'ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ',
+    milkQuantityPlaceholder: 'ਲਿਟਰ ਵਿੱਚ ਮਾਤਰਾ ਦਰਜ ਕਰੋ',
+    cancel: 'ਰੱਦ ਕਰੋ',
+    saveSession: 'ਸੈਸ਼ਨ ਸੰਭਾਲੋ',
+    saving: 'ਸੰਭਾਲ ਰਿਹਾ ਹਾਂ...',
+    
+    // History page
+    milkingHistory: 'ਦਾ ਕੱਢਣ ਦਾ ਇਤਿਹਾਸ',
+    viewAllSessions: 'ਆਪਣੇ ਸਾਰੇ ਪਿਛਲੇ ਸੈਸ਼ਨ ਵੇਖੋ',
+    totalSessions: 'ਕੁੱਲ ਸੈਸ਼ਨ',
+    totalMilk: 'ਕੁੱਲ ਦਾ',
+    totalTime: 'ਕੁੱਲ ਸਮਾਂ',
+    avgPerSession: 'ਪ੍ਰਤੀ ਸੈਸ਼ਨ ਔਸਤ',
+    date: 'ਤਾਰੀਖ',
+    startTime: 'ਸ਼ੁਰੂ ਦਾ ਸਮਾਂ',
+    endTime: 'ਖਤਮ ਹੋਣ ਦਾ ਸਮਾਂ',
+    duration: 'ਮਿਆਦ',
+    milk: 'ਦਾ',
+    noSessionsYet: 'ਹਨੂੰ ਤੱਕ ਕੋਈ ਸੈਸ਼ਨ ਨਹੀਂ!',
+    startFirstSession: 'ਇਹਾਂ ਰਿਕਾਰਡ ਦੇਖਣ ਲਈ ਆਪਣਾ ਪਹਿਲਾ ਦਾ ਕੱਢਣ ਦਾ ਸੈਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ।',
+    tryAgain: 'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ',
+    
+    // Toast messages
+    sessionSaved: 'ਸੈਸ਼ਨ ਸੰਭਾਲਿਆ! 🎉',
+    recorded: 'ਰਿਕਾਰਡ ਕੀਤਾ',
+    errorSaving: 'ਸੈਸ਼ਨ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ',
+    checkConnection: 'ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ API ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ',
+    
+    // Settings
+    settings: 'ਸੈਟਿੰਗ',
+    language: 'ਭਾਸ਼ਾ',
+    soundEffects: 'ਆਵਾਜ਼ ਪ੍ਰਭਾਵ',
+    volume: 'ਵੈਲਯੂਮ',
+  },
 };
 
 interface LanguageContextType {
@@ -185,11 +245,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 // Get saved language from localStorage
 const getSavedLanguage = (): Language => {
   const saved = localStorage.getItem('moo-language');
-  return (saved === 'hi' || saved === 'en') ? saved : 'en';
+  return (saved === 'hi' || saved === 'en' || saved === 'pa') ? saved : 'en';
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(getSavedLanguage);
+  const [language, setLanguageState] = useState<Language>(getSavedLanguage());
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
