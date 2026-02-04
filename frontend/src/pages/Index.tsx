@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Timer } from '@/components/Timer';
+import { TimerRing } from '@/components/TimerRing';
 import { MilkQuantityDialog } from '@/components/MilkQuantityDialog';
 import { useTimer } from '@/hooks/useTimer';
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
@@ -11,6 +12,8 @@ import { createSession } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 import { Play, Pause, Square, Clock, Music, Volume2, History, Sparkles } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { FloatingParticles } from '@/components/FloatingParticles';
+import { triggerMilkConfetti } from '@/components/Confetti';
 
 const Index = () => {
   const { toast } = useToast();
@@ -64,6 +67,9 @@ const Index = () => {
         description: `Recorded ${quantity}L of milk in ${Math.floor(finalDuration / 60)}m ${finalDuration % 60}s`,
       });
 
+      // Trigger celebration confetti
+      triggerMilkConfetti();
+
       timer.reset();
       setSessionStartTime(null);
       setShowQuantityDialog(false);
@@ -93,6 +99,9 @@ const Index = () => {
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
         </div>
+        
+        {/* Floating particles */}
+        <FloatingParticles count={15} />
 
         {/* Header */}
         <header className="p-4 sm:p-6 flex justify-between items-center relative z-10">
@@ -258,40 +267,36 @@ const Index = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
+      
+      {/* Floating particles */}
+      <FloatingParticles count={12} />
 
-      {/* Timer Circle with enhanced design */}
+      {/* Timer Circle with ring progress */}
       <motion.div 
         className="relative mb-8 sm:mb-12"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20, duration: 0.6 }}
       >
-        {/* Outer glow ring */}
-        <motion.div
-          className="absolute -inset-4 sm:-inset-6 rounded-full bg-primary/10 blur-2xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Pulsing ring effect */}
-        <motion.div
-          className="absolute inset-0 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full border-4 border-primary/30"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Main timer circle */}
-        <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-primary via-primary to-primary/80 flex flex-col items-center justify-center shadow-2xl relative">
-          <Timer seconds={timer.seconds} className="text-primary-foreground" />
-          <motion.div 
-            className="flex items-center gap-2 text-primary-foreground/90 mt-3"
-            animate={{ opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <Music className="h-4 w-4" />
-            <span className="text-sm font-medium">Milking in progress...</span>
-          </motion.div>
-        </div>
+        <TimerRing 
+          seconds={timer.seconds} 
+          maxSeconds={1800} 
+          size={280}
+          strokeWidth={10}
+          className="sm:scale-110 md:scale-125"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <Timer seconds={timer.seconds} className="text-foreground text-3xl sm:text-4xl md:text-5xl" />
+            <motion.div 
+              className="flex items-center gap-2 text-muted-foreground mt-2"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <Music className="h-4 w-4" />
+              <span className="text-xs sm:text-sm font-medium">Milking in progress...</span>
+            </motion.div>
+          </div>
+        </TimerRing>
       </motion.div>
 
       {/* Control Buttons with improved styling */}
