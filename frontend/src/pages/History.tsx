@@ -91,17 +91,23 @@ export default function History() {
   const totalMinutes = Math.floor(calculatedStats.totalDuration / 60);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20 flex flex-col relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+      </div>
+
       {/* Header */}
       <motion.header 
-        className="p-3 sm:p-4 md:p-6 border-b border-border"
+        className="p-3 sm:p-4 md:p-6 border-b border-border/50 backdrop-blur-sm bg-background/80 sticky top-0 z-20"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="flex items-center gap-3 sm:gap-4 max-w-5xl mx-auto">
           <Link to="/">
-            <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 sm:h-10 sm:w-10">
+            <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 sm:h-10 sm:w-10 hover:bg-secondary/80">
               <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </Link>
@@ -113,48 +119,56 @@ export default function History() {
       </motion.header>
 
       {/* Main Content */}
-      <main className="flex-1 p-3 sm:p-4 md:p-6">
+      <main className="flex-1 p-3 sm:p-4 md:p-6 relative z-10">
         <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
           {/* Stats Cards */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
-              <Card className="bg-card">
-                <CardContent className="p-3 sm:pt-4 sm:pb-4">
-                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
-                  <p className="text-xl sm:text-3xl font-bold text-foreground">{calculatedStats.totalSessions || 0}</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Sessions</p>
+            <motion.div whileHover={{ scale: 1.03, y: -4 }} transition={{ duration: 0.2 }}>
+              <Card className="glass-card border-0 overflow-hidden">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                    <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground">{calculatedStats.totalSessions || 0}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Sessions</p>
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
-              <Card className="bg-card">
-                <CardContent className="p-3 sm:pt-4 sm:pb-4">
-                  <Milk className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
-                  <p className="text-xl sm:text-3xl font-bold text-foreground">{(calculatedStats.totalMilk || 0).toFixed(1)}L</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Milk</p>
+            <motion.div whileHover={{ scale: 1.03, y: -4 }} transition={{ duration: 0.2 }}>
+              <Card className="glass-card border-0 overflow-hidden">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+                    <Milk className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground">{(calculatedStats.totalMilk || 0).toFixed(1)}L</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Milk</p>
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
-              <Card className="bg-card">
-                <CardContent className="p-3 sm:pt-4 sm:pb-4">
-                  <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
-                  <p className="text-xl sm:text-3xl font-bold text-foreground">{totalMinutes || 0}m</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Time</p>
+            <motion.div whileHover={{ scale: 1.03, y: -4 }} transition={{ duration: 0.2 }}>
+              <Card className="glass-card border-0 overflow-hidden">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                    <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground">{totalMinutes || 0}m</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Total Time</p>
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
-              <Card className="bg-card">
-                <CardContent className="p-3 sm:pt-4 sm:pb-4">
-                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-primary mb-1 sm:mb-2" />
-                  <p className="text-xl sm:text-3xl font-bold text-foreground">{(calculatedStats.avgMilkPerSession || 0).toFixed(1)}L</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Avg per Session</p>
+            <motion.div whileHover={{ scale: 1.03, y: -4 }} transition={{ duration: 0.2 }}>
+              <Card className="glass-card border-0 overflow-hidden">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+                    <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground">{(calculatedStats.avgMilkPerSession || 0).toFixed(1)}L</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Avg per Session</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -166,7 +180,7 @@ export default function History() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <Card className="bg-card">
+            <Card className="glass-card border-0 overflow-hidden">
               <CardContent className="p-0">
                 {isLoading ? (
                   <div className="flex items-center justify-center py-16">
