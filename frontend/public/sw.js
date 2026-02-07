@@ -91,3 +91,54 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
+
+// Background Sync event - retry failed offline requests
+self.addEventListener('sync', (event) => {
+  console.log('[SW] Background sync event triggered:', event.tag);
+
+  if (event.tag === 'sync-offline-requests') {
+    event.waitUntil(
+      (async () => {
+        try {
+          // Open the client and send a message to trigger sync
+          const clients = await self.clients.matchAll();
+          clients.forEach((client) => {
+            client.postMessage({
+              type: 'SYNC_OFFLINE_REQUESTS',
+              timestamp: Date.now(),
+            });
+          });
+          console.log('[SW] Background sync request sent to client');
+        } catch (error) {
+          console.error('[SW] Background sync error:', error);
+          throw error; // This will retry the sync
+        }
+      })()
+    );
+  }
+});
+
+// Periodic background sync (if supported)
+self.addEventListener('periodicsync', (event) => {
+  console.log('[SW] Periodic sync event triggered:', event.tag);
+
+  if (event.tag === 'periodic-offline-sync') {
+    event.waitUntil(
+      (async () => {
+        try {
+          const clients = await self.clients.matchAll();
+          clients.forEach((client) => {
+            client.postMessage({
+              type: 'PERIODIC_SYNC',
+              timestamp: Date.now(),
+            });
+          });
+          console.log('[SW] Periodic sync message sent to client');
+        } catch (error) {
+          console.error('[SW] Periodic sync error:', error);
+          throw error;
+        }
+      })()
+    );
+  }
+});
