@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
 const sessionRoutes = require('./routes/sessions');
+const notificationRoutes = require('./routes/notifications');
 
 // Initialize Express app
 const app = express();
@@ -57,6 +58,7 @@ app.get('/health', (req, res) => {
 
 // ✅ API Routes
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // ✅ Root endpoint
 app.get('/', (req, res) => {
@@ -71,6 +73,11 @@ app.get('/', (req, res) => {
       PATCH: '/api/sessions/:id',
       DELETE: '/api/sessions/:id',
       GET: '/api/sessions/stats/overview',
+      POST: '/api/notifications/whatsapp',
+      POST: '/api/notifications/sms',
+      POST: '/api/notifications/bulk',
+      POST: '/api/notifications/test',
+      GET: '/api/notifications/status',
     },
   });
 });
