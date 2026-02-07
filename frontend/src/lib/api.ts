@@ -91,6 +91,88 @@ export async function healthCheck(): Promise<boolean> {
   }
 }
 
+// Generic API functions
+export async function get<T = any>(endpoint: string): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function post<T = any>(endpoint: string, data: any): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to post: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function put<T = any>(endpoint: string, data: any): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to update: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function patch<T = any>(endpoint: string, data: any): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to patch: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function delete_<T = any>(endpoint: string): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+// Re-export delete as delete since delete is a reserved keyword
+export const deleteResource = delete_;
+
 export async function updateSession(
   id: string,
   payload: Partial<CreateSessionPayload>
