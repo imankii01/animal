@@ -85,6 +85,17 @@ interface Translations {
   endTimeError: string;
   actions: string;
   
+  // Milk Sales page
+  milkSales: string;
+  newSale: string;
+  totalRevenue: string;
+  avgPrice: string;
+  recentSales: string;
+  paymentStatus: string;
+  paidSales: string;
+  pendingSales: string;
+  partialSales: string;
+  
   // Statistics page
   statistics: string;
   viewTrends: string;
@@ -226,6 +237,17 @@ const translations: Record<Language, Translations> = {
     endTimeError: 'End time must be after start time',
     actions: 'Actions',
     
+    // Milk Sales page
+    milkSales: 'Milk Sales',
+    newSale: 'New Sale',
+    totalRevenue: 'Total Revenue',
+    avgPrice: 'Avg Price/L',
+    recentSales: 'Recent Sales',
+    paymentStatus: 'Payment Status',
+    paidSales: 'Paid Sales',
+    pendingSales: 'Pending Sales',
+    partialSales: 'Partial Sales',
+    
     // Statistics page
     statistics: 'Statistics',
     viewTrends: 'Analyze your milking patterns',
@@ -363,6 +385,17 @@ const translations: Record<Language, Translations> = {
     endTimeError: 'समाप्ति समय शुरू होने से बाद में होना चाहिए',
     actions: 'क्रियाएं',
     
+    // Milk Sales page
+    milkSales: 'दूध की बिक्री',
+    newSale: 'नई बिक्री',
+    totalRevenue: 'कुल राजस्व',
+    avgPrice: 'औसत कीमत/लीटर',
+    recentSales: 'हाल की बिक्री',
+    paymentStatus: 'भुगतान स्थिति',
+    paidSales: 'भुगतान की गई बिक्री',
+    pendingSales: 'लंबित बिक्री',
+    partialSales: 'आंशिक बिक्री',
+    
     // Statistics page
     statistics: 'सांख्यिकी',
     viewTrends: 'अपने दूध निकालने के पैटर्न का विश्लेषण करें',
@@ -495,6 +528,17 @@ const translations: Record<Language, Translations> = {
     milkRequired: 'ਦਾ ਦੀ ਮਾਤਰਾ ਲਾਜ਼ਮੀ ਹੈ',
     endTimeError: 'ਸਮਾਪਤੀ ਸਮਾਂ ਸ਼ੁਰੂ ਹੋਣ ਤੋਂ ਬਾਅਦ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ',
     actions: 'ਕਾਰਵਾਈਆਂ',
+    
+    // Milk Sales page
+    milkSales: 'ਦਾ ਵਿਕਰੀ',
+    newSale: 'ਨਵੀਂ ਵਿਕਰੀ',
+    totalRevenue: 'ਕੁਲ ਰਾਜ਼ਵੀ',
+    avgPrice: 'ਔਸਤ ਕੀਮਤ/ਲੀ',
+    recentSales: 'ਤਾਜ਼ਾ ਵਿਕਰੀ',
+    paymentStatus: 'ਭੁਗਤਾਨ ਸਥਿਤੀ',
+    paidSales: 'ਭੁਗਤਾਨ ਕੀਤੀ ਵਿਕਰੀ',
+    pendingSales: 'ਮੁਲਤਵੀ ਵਿਕਰੀ',
+    partialSales: 'ਆਂਸ਼ਿਕ ਵਿਕਰੀ',
     
     // Statistics page
     statistics: 'ਅੰਕੜੇ',

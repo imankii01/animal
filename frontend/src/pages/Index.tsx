@@ -12,7 +12,7 @@ import { useSoundEffects } from '@/hooks/useSoundEffects';
 import { createSession } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Play, Pause, Square, Clock, Music, History, Sparkles, Volume2, BarChart3 } from 'lucide-react';
+import { Play, Pause, Square, Clock, Music, History, Sparkles, Volume2, BarChart3, IndianRupee } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { FloatingParticles } from '@/components/FloatingParticles';
 import { triggerMilkConfetti } from '@/components/Confetti';
@@ -157,6 +157,12 @@ const Index = () => {
                 <span className="hidden sm:inline">{t.goals || 'Goals'}</span>
               </Button>
             </Link> */}
+            <Link to="/milk-sales">
+              <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/80">
+                <IndianRupee className="h-4 w-4" />
+                <span className="hidden sm:inline">{t.milkSales || 'Milk Sales'}</span>
+              </Button>
+            </Link>
             <Link to="/statistics">
               <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/80">
                 <BarChart3 className="h-4 w-4" />
