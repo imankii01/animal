@@ -58,20 +58,37 @@ export const SaleForm: React.FC<SaleFormProps> = ({ open, onOpenChange, onSucces
     const fetchBuyers = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${api.API_BASE_URL}/api/buyers?farmerId=${farmerId}&isActive=true&limit=100`, {
+        // Note: For development, using "default" as farmerId will return no buyers
+        // In production, use actual farmer ObjectId
+        const params = new URLSearchParams({
+          isActive: 'true',
+          limit: '100',
+        });
+        
+        // Only add farmerId if it's a valid MongoDB ObjectId (production)
+        if (farmerId && farmerId !== 'default') {
+          params.append('farmerId', farmerId);
+        }
+        
+        const response = await fetch(`${api.API_BASE_URL}/api/buyers?${params}`, {
           headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
           const data = await response.json();
           setBuyers(data.data || []);
+        } else {
+          console.warn('Failed to fetch buyers:', response.status);
+          setBuyers([]);
         }
       } catch (error) {
+        console.error('Error fetching buyers:', error);
         toast({
           variant: 'destructive',
           title: 'Error',
           description: 'Failed to load buyers',
         });
+        setBuyers([]);
       } finally {
         setLoading(false);
       }
@@ -284,7 +301,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({ open, onOpenChange, onSucces
                     <SelectValue placeholder="Select grade..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Not Graded</SelectItem>
+                    <SelectItem value="none">Not Graded</SelectItem>
                     <SelectItem value="A">A (Premium)</SelectItem>
                     <SelectItem value="B">B (Standard)</SelectItem>
                     <SelectItem value="C">C (Basic)</SelectItem>
