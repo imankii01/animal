@@ -5,6 +5,8 @@ const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
 const sessionRoutes = require('./routes/sessions');
 const notificationRoutes = require('./routes/notifications');
+const milkSalesRoutes = require('./routes/milkSales');
+const buyerRoutes = require('./routes/buyers');
 
 // Initialize Express app
 const app = express();
@@ -59,6 +61,8 @@ app.get('/health', (req, res) => {
 // ✅ API Routes
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/milk-sales', milkSalesRoutes);
+app.use('/api/buyers', buyerRoutes);
 
 // ✅ Root endpoint
 app.get('/', (req, res) => {
