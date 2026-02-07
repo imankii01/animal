@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import * as api from '@/lib/api';
 
 interface Buyer {
   _id: string;
@@ -57,7 +58,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({ open, onOpenChange, onSucces
     const fetchBuyers = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/buyers?farmerId=${farmerId}&isActive=true&limit=100`, {
+        const response = await fetch(`${api.API_BASE_URL}/api/buyers?farmerId=${farmerId}&isActive=true&limit=100`, {
           headers: { 'Content-Type': 'application/json' },
         });
 
@@ -126,7 +127,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({ open, onOpenChange, onSucces
         notes: formData.notes,
       };
 
-      const response = await fetch('/api/milk-sales', {
+      const response = await fetch(`${api.API_BASE_URL}/api/milk-sales`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submitData),

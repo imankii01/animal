@@ -88,8 +88,8 @@ export const MilkSales: React.FC = () => {
       });
 
       const [salesRes, statsRes] = await Promise.all([
-        api.get(`/api/milkSales?${queryParams}`),
-        api.get(`/api/milkSales/stats?${queryParams}`),
+        api.get(`/api/milk-sales?${queryParams}`),
+        api.get(`/api/milk-sales/stats/overview?${queryParams}`),
       ]);
 
       setSales(Array.isArray(salesRes) ? salesRes : salesRes.data || []);
@@ -114,7 +114,7 @@ export const MilkSales: React.FC = () => {
         endDate: dateRange.end,
       });
 
-      const response = await fetch(`/api/milk-sales/stats/overview?${queryParams}`, {
+      const response = await fetch(`${api.API_BASE_URL}/api/milk-sales/stats/overview?${queryParams}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });

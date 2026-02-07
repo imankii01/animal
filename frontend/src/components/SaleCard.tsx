@@ -77,7 +77,7 @@ export const SaleCard: React.FC<SaleCardProps> = ({ sale, onEdit, onDelete, onRe
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      await api.deleteResource(`/api/milkSales/${sale._id}`);
+      await api.deleteResource(`/api/milk-sales/${sale._id}`);
       toast({
         title: language === 'en' ? 'Sale Deleted' : language === 'hi' ? 'बिक्री हटाई गई' : 'ਵਿਕਰੀ ਹਟਾਈ ਗਈ',
         description: language === 'en' ? 'The sale has been deleted successfully.' : language === 'hi' ? 'बिक्री सफलतापूर्वक हटा दी गई है।' : 'ਵਿਕਰੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ ਹੈ।',
